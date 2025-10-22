@@ -1,0 +1,55 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+
+<PageTitle>Roachagram!</PageTitle>
+
+<div style="min-width:320px;padding:10px;">
+    <div style="padding:10px;text-align:center;">
+        <img src="/roach_machine_logo.png"
+             style="height:100px;object-fit:contain;display:block;margin:0 auto;" />
+
+        <h3 style="color:white;margin:8px 0;">Roachagram!</h3>
+
+        <div style="color:white;font-family:monospace;margin-bottom:10px;">
+            Anagrams Powered by <a class="roach-link" href="https://roachmachine.com" target="_blank" rel="noopener noreferrer">Roach Machine</a>
+        </div>
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:center;align-items:center;">
+        <input aria-label="Enter words or a name"
+               placeholder="Enter words or a name (max 20 chars)"
+               maxlength="20"
+               disabled="@IsLoading"
+               @bind="Input"
+               @bind:event="oninput"
+               style="width:300px;background:white;color:black;padding:6px;border-radius:4px;border:1px solid #ccc;" />
+
+        <button type="button"
+                title="Submits input for anagrams"
+                @onclick="OnSubmit"
+                disabled="@IsLoading"
+                style="width:150px;background:white;color:black;border:1px solid #ccc;padding:6px;border-radius:4px;">
+            Find Anagrams!
+        </button>
+    </div>
+
+    @if (IsLoading)
+    {
+        <div style="text-align:center;margin-top:20px;">
+            <div class="spinner-border text-light" role="status" style="width:80px;height:80px;">
+                <span class="visually-hidden">Thinking...</span>
+            </div>
+        </div>
+    }
+
+    <div style="text-align:center;margin-top:20px;">
+        @if (!string.IsNullOrEmpty(DisplayText))
+        {
+            <div id="typedText" style="font-family:monospace;white-space:pre-wrap;margin:0 auto;max-width:800px;text-align:left;color:white;">
+                @((MarkupString)DisplayText)
+            </div>
+        }
+    </div>
+</div>
+
