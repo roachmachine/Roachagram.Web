@@ -10,4 +10,13 @@
     <PackageReference Include="HtmlSanitizer" Version="9.0.886" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\js\seo.js">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\robots.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

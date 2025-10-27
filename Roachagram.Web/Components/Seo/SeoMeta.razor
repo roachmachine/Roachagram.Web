@@ -1,0 +1,43 @@
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+@code {
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public string Description { get; set; } = string.Empty;
+    [Parameter] public string Keywords { get; set; } = string.Empty;
+    [Parameter] public string Canonical { get; set; } = string.Empty;
+    [Parameter] public string Image { get; set; } = string.Empty;
+    [Parameter] public string JsonLd { get; set; } = string.Empty;
+
+    private IJSObjectReference? _module;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // Prefer dynamic ES module import (ensures code is available before calling).
+        try
+        {
+            _module ??= await JS.InvokeAsync<IJSObjectReference>("import", "/js/seo.js");
+            await _module.InvokeVoidAsync("setMeta", Title, Description, Keywords, Canonical, Image, JsonLd);
+        }
+        catch (JSException)
+        {
+            // Fallback to global `seo.setMeta` if module import isn't available.
+            try
+            {
+                await JS.InvokeVoidAsync("seo.setMeta", Title, Description, Keywords, Canonical, Image, JsonLd);
+            }
+            catch
+            {
+                // Swallow any error - SEO helper is non-critical.
+            }
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_module is not null)
+        {
+            await _module.DisposeAsync();
+        }
+    }
+}
