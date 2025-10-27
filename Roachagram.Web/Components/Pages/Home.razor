@@ -11,26 +11,31 @@
 
         <h3 style="color:white;margin:8px 0;">Roachagram!</h3>
 
-        <div style="color:white;font-family:monospace;margin-bottom:10px;">
+        <div style="color:white;font-family:monospace;">
             Anagrams Powered by <a class="roach-link" href="https://roachmachine.com" target="_blank" rel="noopener noreferrer">Roach Machine</a>
+        </div>
+        <div style="color:white;font-family:monospace;margin-bottom:10px;">
+            Roachagram transforms your words into anagrams with smart summaries <br />
+            —typically in 10 seconds, sometimes a bit longer.
+
         </div>
     </div>
 
     <div style="display:flex;gap:10px;justify-content:center;align-items:center;">
         <input aria-label="Enter words or a name"
-               placeholder="Enter words or a name (max 20 chars)"
+               placeholder="Enter words (max 20 chars)"
                maxlength="20"
                disabled="@IsLoading"
                @bind="Input"
                @bind:event="oninput"
-               style="width:300px;background:white;color:black;padding:6px;border-radius:4px;border:1px solid #ccc;" />
+               style="width:250px;background:white;color:black;padding:6px;border-radius:4px;border:1px solid #ccc;" />
 
         <button type="button"
                 title="Submits input for anagrams"
                 @onclick="OnSubmit"
                 disabled="@IsLoading"
-                style="width:150px;background:white;color:black;border:1px solid #ccc;padding:6px;border-radius:4px;">
-            Find Anagrams!
+                style="width:100px;background:white;color:black;border:1px solid #ccc;padding:6px;border-radius:4px;">
+            Go!
         </button>
     </div>
 
