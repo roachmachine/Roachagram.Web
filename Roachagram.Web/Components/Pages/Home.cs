@@ -50,6 +50,9 @@ namespace Roachagram.Web.Components.Pages
         /// </summary>
         private string ButtonText { get; set; } = BUTTON_TEXT_DEFAULT;
 
+        // JSON-LD moved to a C# string to avoid Razor parsing issues.
+        private readonly string JsonLdData = @"{""@context"":""https://schema.org"",""@type"":""WebSite"",""name"":""Roachagram"",""url"":""https://roachagram.com/""}";
+
         /// <summary>
         /// Handle form submission: validate input, call API (via service or HttpClient),
         /// sanitize and format the result, then start the typewriter animation.
