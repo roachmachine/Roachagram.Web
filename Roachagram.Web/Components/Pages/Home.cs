@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using Roachagram.Web.Helpers;
 using Roachagram.Web.Services;
 
@@ -7,6 +6,16 @@ namespace Roachagram.Web.Components.Pages
 {
     public partial class Home
     {
+        /// <summary>
+        /// The default placeholder text displayed in the input field.
+        /// </summary>
+        private const string INPUT_PLACEHOLDER_TEXT_DEFAULT = "Enter words (max 20 chars)";
+
+        /// <summary>
+        /// The default text displayed on the submit button.
+        /// </summary>
+        private const string BUTTON_TEXT_DEFAULT = "Go!";
+
         // Injected HttpClient used as a fallback when IRoachagramAPIService isn't provided.
         [Inject] public HttpClient Http { get; set; } = default!;
 
@@ -32,6 +41,16 @@ namespace Roachagram.Web.Components.Pages
         private int BaseDelayMs { get; } = 1;
 
         /// <summary>
+        /// Gets or sets the placeholder text for the input field.
+        /// </summary>
+        private string PlaceholderText { get; set; } = INPUT_PLACEHOLDER_TEXT_DEFAULT;
+
+        /// <summary>
+        /// Gets or sets the text displayed on the submit button.
+        /// </summary>
+        private string ButtonText { get; set; } = BUTTON_TEXT_DEFAULT;
+
+        /// <summary>
         /// Handle form submission: validate input, call API (via service or HttpClient),
         /// sanitize and format the result, then start the typewriter animation.
         /// </summary>
@@ -49,6 +68,8 @@ namespace Roachagram.Web.Components.Pages
             IsLoading = true;
             RoachagramResponse = string.Empty;
             Input = string.Empty;
+            PlaceholderText = $"Anagramming {inputText}...";
+            ButtonText = "...";
             StateHasChanged();
 
             try
@@ -110,6 +131,8 @@ namespace Roachagram.Web.Components.Pages
             finally
             {
                 // Ensure UI state is reset regardless of success/failure.
+                PlaceholderText = INPUT_PLACEHOLDER_TEXT_DEFAULT;
+                ButtonText = BUTTON_TEXT_DEFAULT;
                 IsLoading = false;
                 Input = string.Empty;
                 StateHasChanged();
