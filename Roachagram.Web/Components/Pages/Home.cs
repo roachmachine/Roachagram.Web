@@ -70,6 +70,7 @@ namespace Roachagram.Web.Components.Pages
             // Enter loading state and clear previous response/input for the UI.
             IsLoading = true;
             RoachagramResponse = string.Empty;
+            DisplayText = string.Empty;
             Input = string.Empty;
             PlaceholderText = $"Anagramming {inputText}...";
             ButtonText = "...";
