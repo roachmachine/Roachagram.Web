@@ -9,7 +9,7 @@ namespace Roachagram.Web.Components.Pages
         /// <summary>
         /// The default placeholder text displayed in the input field.
         /// </summary>
-        private const string INPUT_PLACEHOLDER_TEXT_DEFAULT = "Enter words (max 20 chars)";
+        private const string INPUT_PLACEHOLDER_TEXT_DEFAULT = "Enter words (max 15 chars)";
 
         /// <summary>
         /// The default text displayed on the submit button.
