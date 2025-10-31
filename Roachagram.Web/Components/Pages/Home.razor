@@ -1,6 +1,7 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 
+@using Microsoft.AspNetCore.Components.Web
 
 <PageTitle>Roachagram!</PageTitle>
 
@@ -35,6 +36,7 @@
                disabled="@IsLoading"
                @bind="Input"
                @bind:event="oninput"
+               @onkeydown="OnInputKeyDown"
                style="width:250px;background:white;color:black;padding:6px;border-radius:4px;border:1px solid #ccc;" />
 
         <button type="button"
@@ -65,3 +67,20 @@
         }
     </div>
 </div>
+
+@code {
+    private async Task OnInputKeyDown(KeyboardEventArgs e)
+    {
+        // Guard against accidental triggers while already processing
+        if (IsLoading)
+        {
+            return;
+        }
+
+        // If Enter is pressed, submit
+        if (e?.Key == "Enter")
+        {
+            await OnSubmit();
+        }
+    }
+}
