@@ -9,7 +9,7 @@ namespace Roachagram.Web.Components.Pages
         /// <summary>
         /// The default placeholder text displayed in the input field.
         /// </summary>
-        private const string INPUT_PLACEHOLDER_TEXT_DEFAULT = "Enter words (max 15 chars)";
+        private const string INPUT_PLACEHOLDER_TEXT_DEFAULT = "Enter a name or words";
 
         /// <summary>
         /// The default text displayed on the submit button.
@@ -72,8 +72,8 @@ namespace Roachagram.Web.Components.Pages
             RoachagramResponse = string.Empty;
             DisplayText = string.Empty;
             Input = string.Empty;
-            PlaceholderText = $"Anagramming {inputText}...";
-            ButtonText = "...";
+            PlaceholderText = $"Thinking...";
+            ButtonText = "🚀";
             StateHasChanged();
 
             try
@@ -111,7 +111,12 @@ namespace Roachagram.Web.Components.Pages
 
                 RoachagramResponse = escaped;
 
+                //let's turn off and reset the input/button text
+                // Ensure UI state is reset regardless of success/failure.
+                PlaceholderText = INPUT_PLACEHOLDER_TEXT_DEFAULT;
+                ButtonText = BUTTON_TEXT_DEFAULT;
                 IsLoading = false;
+                Input = string.Empty;
 
                 try
                 {
@@ -134,11 +139,6 @@ namespace Roachagram.Web.Components.Pages
             }
             finally
             {
-                // Ensure UI state is reset regardless of success/failure.
-                PlaceholderText = INPUT_PLACEHOLDER_TEXT_DEFAULT;
-                ButtonText = BUTTON_TEXT_DEFAULT;
-                IsLoading = false;
-                Input = string.Empty;
                 StateHasChanged();
             }
         }
@@ -189,9 +189,9 @@ namespace Roachagram.Web.Components.Pages
 
                 // Apply variable delay: longer for punctuation and newlines for natural pacing.
                 int delay = BaseDelayMs;
-                if (c == '.' || c == '!' || c == '?') delay *= 8;
-                if (c == ',' || c == ';' || c == ':') delay *= 4;
-                if (c == '\n' || c == '\r') delay *= 6;
+                if (c == '.' || c == '!' || c == '?') delay *= 4;
+                if (c == ',' || c == ';' || c == ':') delay *= 2;
+                if (c == '\n' || c == '\r') delay *= 3;
 
                 await Task.Delay(delay, token);
             }

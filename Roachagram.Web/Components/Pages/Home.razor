@@ -3,6 +3,28 @@
 
 @using Microsoft.AspNetCore.Components.Web
 
+<style>
+    /* Pin privacy link to top-left of viewport */
+    .top-left {
+
+        top: 12px;
+        left: 12px;
+        z-index: 1000;
+        font-family: monospace;
+        color: #376f78;
+        background: transparent;
+    }
+
+    /* Slightly adjust for very small screens */
+    @@media (max-width: 480px) {
+        .top-left {
+            top: 8px;
+            left: 8px;
+            font-size: 14px;
+        }
+    }
+</style>
+
 <PageTitle>Roachagram!</PageTitle>
 
 <SeoMeta
@@ -13,38 +35,39 @@
     Image="/roach_machine_logo.png"
     JsonLd="@JsonLdData" />
 
-<div style="min-width:320px;padding:10px;color:white;font-family:monospace;">
+<div style="min-width:320px;padding:10px;color:#376f78;font-family:monospace;">
+    <!-- Pinned privacy link -->
+    <div class="top-left">
+        <NavLink href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</NavLink>
+    </div>
+
     <div style="padding:10px;text-align:center;">
-        <img src="/roach_machine_logo.png"
-             style="height:100px;object-fit:contain;display:block;margin:0 auto;" />
-
-        <h3>Roachagram!</h3>
-
+        <img src="/roachagram-robot.png"
+             style="height:150px;object-fit:contain;display:block;margin:0 auto;" />
         <div>
-            Powered by <a class="roach-link" href="https://roachmachine.com" target="_blank" rel="noopener noreferrer">Roach Machine</a> © 2025
+            Powered by <a href="https://roachmachine.com" target="_blank" rel="noopener noreferrer">Roach Machine</a> © 2025
         </div>
         <div>
             Smart anagrams in ~15 seconds, sometimes longer.
-            English only. No data stored. No tracking. Free.
+            So far, English only. No data stored. No tracking. No ads.
         </div>
-        <div><NavLink class="roach-link" href="/privacy">Privacy Policy</NavLink></div>
     </div>
 
     <div style="display:flex;gap:10px;justify-content:center;align-items:center;">
         <input aria-label="Enter words or a name"
+               class="ro-input"
                placeholder="@PlaceholderText"
                maxlength="15"
                disabled="@IsLoading"
                @bind="Input"
                @bind:event="oninput"
-               @onkeydown="OnInputKeyDown"
-               style="width:250px;background:white;color:black;padding:6px;border-radius:4px;border:1px solid #ccc;" />
+               @onkeydown="OnInputKeyDown"/>
 
         <button type="button"
                 title="Submits input for anagrams"
                 @onclick="OnSubmit"
                 disabled="@IsLoading"
-                style="width:100px;background:white;color:black;border:1px solid #ccc;padding:6px;border-radius:4px;">
+                class="ro-button">
             @ButtonText
         </button>
     </div>
@@ -53,7 +76,7 @@
     @if (IsLoading)
     {
         <div style="text-align:center;margin-top:20px;">
-            <div class="spinner-border text-light" role="status" style="width:80px;height:80px;">
+            <div class="spinner-border" style="width:100px;height:100px;color:#df6b2c">
                 <span class="visually-hidden">Thinking...</span>
             </div>
         </div>
@@ -62,7 +85,7 @@
     <div style="text-align:center;margin-top:20px;">
         @if (!string.IsNullOrEmpty(DisplayText))
         {
-            <div id="typedText" style="font-family:monospace;white-space:pre-wrap;margin:0 auto;max-width:800px;text-align:left;color:white;">
+            <div id="typedText" style="font-family:monospace;white-space:pre-wrap;margin:0 auto;max-width:800px;text-align:left;">
                 @((MarkupString)DisplayText)
             </div>
         }
