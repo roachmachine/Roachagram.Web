@@ -1,10 +1,10 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #000000;
+    background-color: #f8e1b6;
 }
 
 a, .btn-link {
-    color: #006bb7;
+    color: #df6b2c;
 }
 
 .btn-primary {
@@ -13,8 +13,10 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.btn:hover, .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    outline: none; /* remove default focus outline */
+    border-color: #df6b2c; /* desired border color when inside textbox */
+    box-shadow: 0 0 0 4px rgba(223,107,44,0.08); /* subtle ring for accessibility */
 }
 
 .content {
@@ -58,4 +60,56 @@ h1:focus {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
+}
+
+/* Scoped component styles for the input focus state */
+.ro-input {
+    width: 200px;
+    background: white;
+    color: #376f78;
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    transition: box-shadow .15s ease, border-color .15s ease;
+    box-sizing: border-box;
+}
+
+    /* When focused, change the border color and add a subtle focus ring */
+    .ro-input:focus,
+    .ro-input:focus-visible {
+        outline: none; /* remove default focus outline */
+        border-color: #df6b2c; /* desired border color when inside textbox */
+        box-shadow: 0 0 0 4px rgba(223,107,44,0.08); /* subtle ring for accessibility */
+    }
+
+/* Button styles to match input focus/hover effects */
+.ro-button {
+    width: 80px;
+    background: white;
+    color: #376f78;
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    transition: box-shadow .15s ease, border-color .15s ease, transform .04s ease;
+    box-sizing: border-box;
+}
+
+/* Only apply hover styles when the button is NOT disabled */
+.ro-button:not(:disabled):hover {
+    outline: none;
+    border-color: #df6b2c;
+    box-shadow: 0 0 0 4px rgba(223,107,44,0.08);
+    cursor: pointer;
+}
+
+/* Disabled appearance: prevent hover visuals and use default cursor */
+.ro-button:disabled {
+    opacity: 0.65;
+    cursor: default;
+    box-shadow: none;
+    border-color: #ccc;
+}
+
+.ro-button:active {
+    transform: translateY(1px);
 }
