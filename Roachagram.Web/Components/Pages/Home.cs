@@ -9,7 +9,7 @@ namespace Roachagram.Web.Components.Pages
         /// <summary>
         /// The default placeholder text displayed in the input field.
         /// </summary>
-        private const string INPUT_PLACEHOLDER_TEXT_DEFAULT = "Enter a name or words";
+        private const string INPUT_PLACEHOLDER_TEXT_DEFAULT = "Enter your name";
 
         /// <summary>
         /// The default text displayed on the submit button.

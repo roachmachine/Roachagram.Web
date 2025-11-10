@@ -64,7 +64,7 @@ h1:focus {
 
 /* Scoped component styles for the input focus state */
 .ro-input {
-    width: 200px;
+    width: 220px;
     background: white;
     color: #376f78;
     padding: 6px;
@@ -112,4 +112,23 @@ h1:focus {
 
 .ro-button:active {
     transform: translateY(1px);
+}
+
+/* Pin privacy link to top-left of viewport */
+.top-left {
+    top: 12px;
+    left: 12px;
+    z-index: 1000;
+    font-family: monospace;
+    color: #376f78;
+    background: transparent;
+}
+
+/* Slightly adjust for very small screens */
+@media (max-width: 480px) {
+    .top-left {
+        top: 8px;
+        left: 8px;
+        font-size: 14px;
+    }
 }

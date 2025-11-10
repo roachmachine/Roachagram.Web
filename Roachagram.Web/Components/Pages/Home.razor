@@ -3,43 +3,25 @@
 
 @using Microsoft.AspNetCore.Components.Web
 
-<style>
-    /* Pin privacy link to top-left of viewport */
-    .top-left {
-
-        top: 12px;
-        left: 12px;
-        z-index: 1000;
-        font-family: monospace;
-        color: #376f78;
-        background: transparent;
-    }
-
-    /* Slightly adjust for very small screens */
-    @@media (max-width: 480px) {
-        .top-left {
-            top: 8px;
-            left: 8px;
-            font-size: 14px;
-        }
-    }
-</style>
-
 <PageTitle>Roachagram!</PageTitle>
 
 <SeoMeta
     Title="Roachagram! — Fast anagrams & summaries"
     Description="Roachagram transforms your words into clever anagrams and short summaries. We do not store any personally identifiable information."
-    Keywords="anagram, name anagram, wordplay, roach machine"
+    Keywords="anagram, name anagram, wordplay, roach machine, english, eduction"
     Canonical="https://roachagram.com/"
-    Image="/roach_machine_logo.png"
+    Image="/roachagram-robot.png"
     JsonLd="@JsonLdData" />
 
+<!-- Pinned privacy link -->
+<div class="top-left">
+    <NavLink href="/about" rel="noopener noreferrer">About</NavLink>
+</div>
+<div class="top-left">
+    <NavLink href="/privacy" rel="noopener noreferrer">Privacy</NavLink>
+</div>
+
 <div style="min-width:320px;padding:10px;color:#376f78;font-family:monospace;">
-    <!-- Pinned privacy link -->
-    <div class="top-left">
-        <NavLink href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</NavLink>
-    </div>
 
     <div style="padding:10px;text-align:center;">
         <img src="/roachagram-robot.png"
@@ -48,8 +30,7 @@
             Powered by <a href="https://roachmachine.com" target="_blank" rel="noopener noreferrer">Roach Machine</a> © 2025
         </div>
         <div>
-            Smart anagrams in ~15 seconds, sometimes longer.
-            So far, English only. No data stored. No tracking. No ads.
+            Smart anagrams in ~15 seconds, sometimes a bit longer.
         </div>
     </div>
 
